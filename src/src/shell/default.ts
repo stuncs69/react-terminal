@@ -6,7 +6,6 @@ interface Command {
     };
 }
 
-
 const dict: Record<string, Command> = {
 	tuxsay: {
 		name: "tuxsay",
@@ -20,6 +19,13 @@ const dict: Record<string, Command> = {
 		function: help,
 		info: {
 			description: "help command. <-- you should be running this right now."
+		}
+	},
+	clear: {
+		name: "clear",
+		function: tuxsay,
+		info: {
+			description: "clear the screen."
 		}
 	}
 }

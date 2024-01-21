@@ -18,14 +18,14 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 					<img src={reactLogo} className='pl-2 max-h-6' />
 				</span>
 			</div>
-			<div className='p-2 overflow-scroll'>
+			<div className='p-2 overflow-y-scroll overflow-x-hidden'>
 				<App />
 			</div>
 		</div>
 		<div className='absolute bottom-0 left-2/4 flex flex-col text-zinc-300 font-semibold text-center -translate-x-2/4'>
 			<p>Made using</p>
 			<div className='flex flex-row'>
-				<p>react. tailwind css. my own computer. spotify premium.</p>
+				<p>react. vite. tailwind css. my own computer. spotify premium.</p>
 			</div>
 		</div>
 	</React.StrictMode>,

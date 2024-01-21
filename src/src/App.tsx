@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { runCommand } from "./shell/basic";
 
 export default function App() {
@@ -8,7 +8,7 @@ export default function App() {
 		"simple and awesome since 2024.",
 		"need help? try the help command."
 	] as Array<string>);
-	const [hostName, setHostName] = useState("user")
+	const [hostName, _setHostName] = useState("user")
 
 	useEffect(() => {
 		const detectBackspace = (e: KeyboardEvent) => {

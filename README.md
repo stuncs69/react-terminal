@@ -1,15 +1,3 @@
 # react-terminal
 
- _______
-< hiiii >
- -------
-   \
-    \
-        .--.
-       |o_o |
-       |:_/ |
-      //   \ \
-     (|     | )
-    /'\_   _/`\
-    \___)=(___/
-
+compiled and created using vite.

@@ -1,9 +1,9 @@
 interface Command {
-    name: string;
-    function: (params: string[]) => string[];
-    info: {
-        description: string;
-    };
+	name: string;
+	function: (params: string[]) => string[];
+	info: {
+		description: string;
+	};
 }
 
 const dict: Record<string, Command> = {
@@ -27,28 +27,36 @@ const dict: Record<string, Command> = {
 		info: {
 			description: "clear the screen."
 		}
+	},
+	curl: {
+		name: "curl",
+		//@ts-ignore
+		function: curl,
+		info: {
+			description: "fetch a url."
+		}
 	}
 }
 
 
 function tuxsay(params: Array<string>) {
 	let sentence = ""
-	params.forEach(letter => sentence=sentence+letter+" ")
-	sentence = sentence.slice(0,-1)
+	params.forEach(letter => sentence = sentence + letter + " ")
+	sentence = sentence.slice(0, -1)
 
 	let length = sentence.length + 4
 
-    const tuxAsciiArt = [
-        "   \\",
-        "    \\",
-        "        .--.",
-        "       |o_o |",
-        "       |:_/ |",
-        "      //   \\ \\",
-        "     (|     | )",
-        "    /'\\_   _/`\\",
-        "    \\___)=(___/"
-    ];
+	const tuxAsciiArt = [
+		"   \\",
+		"    \\",
+		"        .--.",
+		"       |o_o |",
+		"       |:_/ |",
+		"      //   \\ \\",
+		"     (|     | )",
+		"    /'\\_   _/`\\",
+		"    \\___)=(___/"
+	];
 
 	const line = Array.from({ length }, () => '-').join('');
 
@@ -56,6 +64,27 @@ function tuxsay(params: Array<string>) {
 
 	return [line, `< ${sentence} >`, line, ...tuxAsciiArt]
 }
+async function curl(params: Array<string>): Promise<Array<string>> {
+	if (params.length !== 1) {
+	  return ["curl: no url specified"];
+	}
+  
+	const url = params[0];
+	let result = [] as Array<string>;
+  
+	result.push(`fetching ${url}...`);
+	result.push("");
+  
+	try {
+	  const response = await fetch(url);
+	  const text = await response.text();
+	  result.push(text);
+	} catch (error) {
+	  result.push(`error fetching ${url}: ${error}`);
+	}
+  
+	return result;
+  }
 
 function help(_params: Array<string>) {
 	let result = [] as Array<string>

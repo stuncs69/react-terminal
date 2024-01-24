@@ -19,12 +19,15 @@ export default function App() {
 			}
 		}
 
-		const handleKeyPress = (e: KeyboardEvent) => {
+		const handleKeyPress = async (e: KeyboardEvent) => {
 			switch (e.code) {
 				case "Enter":
 					setCommandOutput((old) => [...old, `${hostName} ~:$ ${command}`])
 					//@ts-ignore
-					if (!command.startsWith("clear")) setCommandOutput((old) => [...old, ...runCommand(command)])
+					if (command != "clear") {
+						let run = await runCommand(command)
+						setCommandOutput((old) => [...old, ...run])
+					}
 					else setCommandOutput([])
 					setCommand("")
 

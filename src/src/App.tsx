@@ -8,10 +8,12 @@ export default function App() {
 		"simple and awesome since 2024.",
 		"need help? try the help command."
 	] as Array<string>);
+	const [usedCommands, setUsedCommands] = useState([] as Array<string>)
 	const [hostName, _setHostName] = useState("user")
 
 	useEffect(() => {
 		const detectBackspace = (e: KeyboardEvent) => {
+			console.log(e.code)
 			switch (e.code) {
 				case "Backspace":
 					setCommand((prevCommand) => prevCommand.slice(0, -1))
@@ -26,6 +28,7 @@ export default function App() {
 					//@ts-ignore
 					if (command != "clear") {
 						let run = await runCommand(command)
+						setUsedCommands((old) => [...old, ...run])
 						setCommandOutput((old) => [...old, ...run])
 					}
 					else setCommandOutput([])
@@ -58,7 +61,5 @@ export default function App() {
 		</pre>
 		<div className="top-3.5" id="scrollto">&nbsp;</div> {/* Kinda hacky */}
 		</>
-
-		
 );
 }

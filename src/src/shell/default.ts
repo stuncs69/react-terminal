@@ -35,9 +35,53 @@ const dict: Record<string, Command> = {
 		info: {
 			description: "fetch a url."
 		}
-	}
+	},
+	jsh: {
+		name: "jsh",
+		//@ts-ignore
+		function: jsh,
+		info: {
+			description: "Run some JS from the terminal."
+		}
+	},
+	jfetch: {
+		name: "jfetch",
+		//@ts-ignore
+		function: jfetch,
+		info: {
+			description: "Show basic specs."
+		}
+	},
 }
 
+function jsh(params: Array<string>) {
+	let sentence = ""
+	params.forEach(letter => sentence = sentence + letter + " ")
+	sentence = sentence.slice(0, -1)
+
+	let result = [] as Array<string>;
+
+	const _debugLog = console.log;
+
+	console.log = function(message) {
+		result.push(message)
+	}
+
+	eval(sentence)
+
+	return result;
+}
+
+function jfetch(_: Array<string>) {
+	let result = [
+		`CPU Cores: ${navigator.hardwareConcurrency}`,
+		`User Agent: ${navigator.userAgent}`,
+		`Preferred language: ${navigator.language}`,
+		`Online: ${navigator.onLine}`
+	] as Array<string>;
+
+	return result
+}
 
 function tuxsay(params: Array<string>) {
 	let sentence = ""
